@@ -1,6 +1,5 @@
 package fr.leboncoin.androidrecruitmenttestapp.ui
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -55,7 +54,7 @@ fun AlbumItem(
                     .crossfade(true)
                     .build(),
                 contentDescription = album.title,
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(1f),
                 contentScale = ContentScale.Crop
