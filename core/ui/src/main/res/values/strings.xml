@@ -1,0 +1,5 @@
+<resources>
+    <string name="core_ui_add_favorite">Add to favorites</string>
+    <string name="core_ui_remove_favorite">Remove from favorites</string>
+    <string name="core_ui_retry">Retry</string>
+</resources>
