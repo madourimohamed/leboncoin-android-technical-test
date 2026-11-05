@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.leboncoin.android.application)
+    alias(libs.plugins.leboncoin.hilt)
 }
 
 android {
@@ -23,20 +24,15 @@ android {
 }
 
 dependencies {
-    implementation(projects.data)
+    // The app module only assembles: DI graph, navigation, theme.
+    implementation(projects.core.data)
+    implementation(projects.core.ui)
+    implementation(projects.feature.albums)
+    implementation(projects.feature.details)
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.ui)
-    implementation(platform(libs.spark.bom))
-    implementation(libs.spark)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.compose)
 
     debugImplementation(libs.leakcanary.android)
 }
