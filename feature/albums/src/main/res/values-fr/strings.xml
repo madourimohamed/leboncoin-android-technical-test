@@ -1,0 +1,11 @@
+<resources>
+    <string name="feature_albums_title">Albums</string>
+    <string name="feature_albums_favorites_filter">Favoris</string>
+    <string name="feature_albums_album_number">Album n°%1$d</string>
+    <string name="feature_albums_track_number">Titre n°%1$d</string>
+    <string name="feature_albums_empty">Aucun album pour le moment.</string>
+    <string name="feature_albums_no_favorites">Aucun favori pour le moment.\nTouchez le cœur d\'un album pour l\'ajouter.</string>
+    <string name="feature_albums_error_network">Pas de connexion internet. Vérifiez votre réseau et réessayez.</string>
+    <string name="feature_albums_error_server">Le service est indisponible. Réessayez plus tard.</string>
+    <string name="feature_albums_error_unknown">Une erreur est survenue. Veuillez réessayer.</string>
+</resources>

@@ -40,7 +40,9 @@ class FakeAlbumRepository : AlbumRepository {
     }
 
     override fun observeAlbums(favoritesOnly: Boolean): Flow<PagingData<Album>> =
-        albums.map { list -> PagingData.from(if (favoritesOnly) list.filter { it.isFavorite } else list) }
+        albums.map { list ->
+            fullyLoadedPagingData(if (favoritesOnly) list.filter { it.isFavorite } else list)
+        }
 
     override fun observeAlbum(id: Int): Flow<Album?> =
         albums.map { list -> list.firstOrNull { it.id == id } }

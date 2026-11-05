@@ -28,6 +28,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             "implementation"(libs.library("kotlin-serialization-json"))
 
             "testImplementation"(project(":core:testing"))
+            "testImplementation"(libs.library("androidx-ui-test-junit4"))
+            "testImplementation"(libs.library("robolectric"))
+            "debugImplementation"(libs.library("androidx-ui-test-manifest"))
         }
     }
 }
