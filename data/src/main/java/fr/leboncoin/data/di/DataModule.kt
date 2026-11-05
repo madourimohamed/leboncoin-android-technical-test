@@ -1,6 +1,6 @@
 package fr.leboncoin.data.di
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import fr.leboncoin.data.BuildConfig
 import fr.leboncoin.data.network.api.AlbumApiService
 import fr.leboncoin.data.repository.AlbumRepository
