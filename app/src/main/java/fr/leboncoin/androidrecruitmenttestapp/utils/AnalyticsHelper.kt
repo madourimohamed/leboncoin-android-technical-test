@@ -8,7 +8,8 @@ class AnalyticsHelper {
     private var context: Context? = null
 
     fun initialize(context: Context) {
-        this.context = context
+        // Never keep an Activity in a long-lived object: it would leak it.
+        this.context = context.applicationContext
     }
 
     fun trackSelection(itemId: String) {
