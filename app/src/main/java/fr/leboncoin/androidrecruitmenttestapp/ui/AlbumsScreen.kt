@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,9 +18,7 @@ fun AlbumsScreen(
     onItemSelected : (AlbumDto) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val albums by viewModel.albums.collectAsStateWithLifecycle(emptyList())
-
-    LaunchedEffect(Unit) { viewModel.loadAlbums() }
+    val albums by viewModel.albums.collectAsStateWithLifecycle()
 
     Scaffold(modifier = modifier) {
         LazyColumn(

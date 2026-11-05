@@ -2,26 +2,32 @@ package fr.leboncoin.androidrecruitmenttestapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import fr.leboncoin.data.network.model.AlbumDto
 import fr.leboncoin.data.repository.AlbumRepository
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-@OptIn(DelicateCoroutinesApi::class)
 class AlbumsViewModel(
     private val repository: AlbumRepository,
 ) : ViewModel() {
 
-    private val _albums = MutableSharedFlow<List<AlbumDto>>()
-    val albums: SharedFlow<List<AlbumDto>> = _albums
+    private val _albums = MutableStateFlow<List<AlbumDto>>(emptyList())
+    val albums: StateFlow<List<AlbumDto>> = _albums.asStateFlow()
+
+    init {
+        loadAlbums()
+    }
 
     fun loadAlbums() {
-        GlobalScope.launch {
+        viewModelScope.launch {
             try {
-                _albums.emit(repository.getAllAlbums())
+                _albums.value = repository.getAllAlbums()
+            } catch (e: CancellationException) {
+                throw e
             } catch (_: Exception) { /* TODO: Handle errors */ }
         }
     }
@@ -29,8 +35,11 @@ class AlbumsViewModel(
     class Factory(
         private val repository: AlbumRepository,
     ) : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass.isAssignableFrom(AlbumsViewModel::class.java)) {
+                "Unknown ViewModel class: ${modelClass.name}"
+            }
+            @Suppress("UNCHECKED_CAST")
             return AlbumsViewModel(repository) as T
         }
     }
